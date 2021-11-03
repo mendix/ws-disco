@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Package
+      run: dotnet pack --configuration Release --output "out_nuget" --no-build
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: nuget package
+        path: ${{ github.workspace }}/**/*.nupkg
+      
+    - name: Publish
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        dotnet nuget add source "https://nuget.pkg.github.com/mendix/index.json" --name "GitHub" --username ${{ secrets.GHPACKAGESUSER }} --password ${{ secrets.GHPACKAGESTOKEN }} --store-password-in-clear-text
+        dotnet nuget push "**/out_nuget/Mendix.Web.Services.Discovery.*.nupkg" --api-key ${{ secrets.GHPACKAGESTOKEN }} --source "GitHub" --skip-duplicate
