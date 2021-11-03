@@ -4,6 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Company>Mendix</Company>
+    <Copyright>(c) Various Mono authors</Copyright>
+    <Authors>Mendix, Mono development team</Authors>
+    <Description>A partial port of System.Web.Services.Discovery code from Mono and .NET Reference Source for .NET Standard 2.0</Description>
+    <RepositoryUrl>https://github.com/mendix/ws-disco.git</RepositoryUrl>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;MONO</DefineConstants>
   </PropertyGroup>
