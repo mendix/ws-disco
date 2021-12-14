@@ -10,6 +10,7 @@
     <Authors>Mendix, Mono development team</Authors>
     <Description>A partial port of System.Web.Services.Discovery code from Mono and .NET Reference Source for .NET Standard 2.0</Description>
     <RepositoryUrl>https://github.com/mendix/ws-disco.git</RepositoryUrl>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
