@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -10,6 +10,7 @@
     <Authors>Mendix, Mono development team</Authors>
     <Description>A partial port of System.Web.Services.Discovery code from Mono and .NET Reference Source for .NET Standard 2.0</Description>
     <RepositoryUrl>https://github.com/mendix/ws-disco.git</RepositoryUrl>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -20,9 +21,17 @@
     <DefineConstants>TRACE;MONO</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
-    <PackageReference Include="System.Web.Services.Description" Version="4.9.0-rc2.21473.1" />
+    <PackageReference Include="System.Web.Services.Description" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net472'">
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net472'">
+    <Compile Remove="**\*.cs" />
   </ItemGroup>
 
 </Project>
