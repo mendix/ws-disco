@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
-    <PackageReference Include="System.Web.Services.Description" Version="4.9.0-rc2.21473.1" />
+    <PackageReference Include="System.Web.Services.Description" Version="4.9.0" />
   </ItemGroup>
 
 </Project>
